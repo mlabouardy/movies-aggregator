@@ -10,6 +10,10 @@ node('workers'){
         docker.build("${imageName}", "-f Dockerfile.test .")
         sh "docker run --rm ${imageName} npm run lint"
     }
+
+    stage('Unit Tests){
+        sh "docker run --rm ${imageName} npm run test"
+    }
 }
 
 def notifySlack(String buildStatus) {
