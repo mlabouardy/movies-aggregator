@@ -1,7 +1,14 @@
+def imageName = "mlabouardy/movies-aggregator"
+
 node('workers'){
     stage('Checkout'){
         checkout scm 
         notifySlack('STARTED')
+    }
+
+    stage('Quality Tests'){
+        docker.build("${imageName}", "-f Dockerfile.test .")
+        sh "docker run --rm ${imageName} npm run lint"
     }
 }
 
