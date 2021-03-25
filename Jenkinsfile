@@ -22,6 +22,12 @@ node('workers'){
             reportName: 'Coverage report',
         ])
     }
+
+    stage('Static Code Analysis'){
+        withSonarQubeEnv('sonarqube'){
+            sh 'sonar-scanner'
+        }
+    }
 }
 
 def notifySlack(String buildStatus) {
