@@ -41,6 +41,10 @@ node('workers'){
             docker.image(imageName).push(commitID())
         }
     }
+
+    stage('Deploy'){
+        docker.build("${imageName}-release", "-f Dockerfile.release .")
+    }
 }
 
 def notifySlack(String buildStatus) {
