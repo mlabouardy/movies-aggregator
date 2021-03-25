@@ -7,12 +7,12 @@ node('workers'){
     }
 
     stage('Quality Tests'){
-        docker.build("${imageName}", "-f Dockerfile.test .")
+        docker.build("${imageName}-test", "-f Dockerfile.test .")
         sh "docker run --rm ${imageName} npm run lint"
     }
 
     stage('Unit Tests'){
-        sh "docker run --rm ${imageName} npm run test"
+        sh "docker run --rm ${imageName}-test npm run test"
         publishHTML (target : [
             allowMissing: false,
             alwaysLinkToLastBuild: true,
@@ -27,6 +27,10 @@ node('workers'){
         withSonarQubeEnv('sonarqube'){
             sh 'sonar-scanner'
         }
+    }
+
+    stage('Build'){
+        docker.build(imageName)
     }
 }
 
