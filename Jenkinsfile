@@ -11,7 +11,7 @@ node('workers'){
         sh "docker run --rm ${imageName} npm run lint"
     }
 
-    stage('Unit Tests){
+    stage('Unit Tests'){
         sh "docker run --rm ${imageName} npm run test"
     }
 }
