@@ -1,0 +1,9 @@
+.app_section {
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.movies {
+  width: 100%;
+}

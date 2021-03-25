@@ -1,0 +1,15 @@
+.movie {
+    width: 100%;
+    display: flex;
+}
+
+.movie .poster {
+    width: 100px;
+}
+
+.movie .details {}
+
+.movie .title {
+    font-size: large;
+    font-weight: bold;
+}
