@@ -1,4 +1,6 @@
 def imageName = "mlabouardy/movies-aggregator"
+def registry = "305929695733.dkr.ecr.eu-central-1.amazonaws.com/mlabouardy/movies-aggregator"
+def region = "eu-central-1"
 
 node('workers'){
     stage('Checkout'){
@@ -31,6 +33,13 @@ node('workers'){
 
     stage('Build'){
         docker.build(imageName)
+    }
+
+    stage('Push'){
+        sh "\$(aws ecr get-login --no-include-email --region ${region}) || true"
+        docker.withRegistry("https://${registry}"){
+            docker.image(imageName).push(commitID())
+        }
     }
 }
 
