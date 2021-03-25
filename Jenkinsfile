@@ -13,6 +13,14 @@ node('workers'){
 
     stage('Unit Tests'){
         sh "docker run --rm ${imageName} npm run test"
+        publishHTML (target : [
+            allowMissing: false,
+            alwaysLinkToLastBuild: true,
+            keepAll: true,
+            reportDir: "$PWD/coverage/lcov-report/",
+            reportFiles: 'index.html',
+            reportName: 'Coverage report',
+        ])
     }
 }
 
