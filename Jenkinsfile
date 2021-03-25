@@ -10,7 +10,7 @@ node('workers'){
 
     stage('Quality Tests'){
         docker.build("${imageName}-test", "-f Dockerfile.test .")
-        sh "docker run --rm ${imageName} npm run lint"
+        sh "docker run --rm ${imageName}-test npm run lint"
     }
 
     stage('Unit Tests'){
