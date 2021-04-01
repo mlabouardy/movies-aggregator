@@ -1,5 +1,5 @@
 def imageName = "mlabouardy/movies-aggregator"
-def registry = "305929695733.dkr.ecr.eu-central-1.amazonaws.com/mlabouardy/movies-aggregator"
+def registry = "ID.dkr.ecr.eu-central-1.amazonaws.com/mlabouardy/movies-aggregator"
 def region = "eu-central-1"
 
 node('workers'){
